@@ -6,6 +6,7 @@ var city = []
 
 
 
+
 btn.addEventListener("click", function(event) {
     event.preventDefault();
     console.log(inputCity.value);
@@ -27,26 +28,28 @@ function getCurrentWeather(city){
 }
 
 function weatherData(lat, lon){
-    var weatherNow = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=5449c484011cd4324f0163078b3d1824"
+    var weatherNow = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=5449c484011cd4324f0163078b3d1824&units=imperial"
     fetch(weatherNow)
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
         console.log(data);
-        document.getElementById('temp').textContent = data.main.temp
-        document.getElementById('humidity').textContent = data.main.humidity
-        document.getElementById('wind').textContent = data.main.wind
+        document.getElementById('cityname').textContent = data.name
+        document.getElementById('date').textContent = dayjs().format('MMM D, YYYY')
+        document.getElementById('temp').textContent = "Temperature " + data.main.temp + "°F"
+        document.getElementById('humidity').textContent = "Humidity " + data.main.humidity + "%"
+        document.getElementById('wind').textContent = "Wind Speed " + data.wind.speed + "mph"
     })
 }
 
 function weatherlater(lat, lon) {
-    var fivedays = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=5449c484011cd4324f0163078b3d1824"
+    var fivedays = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=5449c484011cd4324f0163078b3d1824&units=imperial"
     fetch(fivedays)
     .then(function(response) {
-        return response.json();    
+       return response.json();    
     })
-    .then(function(data) {
-        console.log(data);
-    })
+    .then(function(data2) {
+       console.log(data2);
+  })
 }
