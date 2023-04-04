@@ -63,10 +63,10 @@ function weatherlater(lat, lon) {
     .then(function(data) {
        console.log(data);
        for(i=0; i < 4; i++){
-        document.getElementById("day" +(i+1)) = data.list[i].dt_txt
-        document.getElementById("day" +(i+1)+ "temp") = data.list[i].main.temp
-        document.getElementById("day" +(i+1)+ "humidity") = data.list[i].main.humidity
-        document.getElementById("day" +(i+1)+ "wind") = data.list[i].main.wind
+        document.getElementById("day" +(i+1)) = data.list[0].dt_txt
+        document.getElementById("day" +(i+1)+ "temp") = data.list[0].main.temp
+        document.getElementById("day" +(i+1)+ "humidity") = data.list[0].main.humidity
+        document.getElementById("day" +(i+1)+ "wind") = data.list[0].main.wind
        }
     })
 }
