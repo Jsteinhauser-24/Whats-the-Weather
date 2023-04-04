@@ -14,7 +14,7 @@ btn.addEventListener("click", function(event) {
 })
 
 function getCurrentWeather(city){
-    var currentcity = "http://api.openweathermap.org/geo/1.0/direct?q=" + city +"&limit=5&appid=5449c484011cd4324f0163078b3d1824"
+    var currentcity = "https://api.openweathermap.org/geo/1.0/direct?q=" + city +"&limit=5&appid=5449c484011cd4324f0163078b3d1824"
     fetch(currentcity)
     .then(function(response) {
         return response.json();
