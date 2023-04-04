@@ -24,7 +24,16 @@ function getCurrentWeather(city){
         console.log(data[0].lon);
         weatherData(data[0].lat, data[0].lon)
         weatherlater(data[0].lat, data[0].lon)
+
+        localStorage.setItem("city", inputCity);
+        rendercity()
     });
+
+function rendercity() {
+    var lastcity = (localStorage.getItem("city"));
+    console.log(inputCity)
+}
+   
 }
 
 function weatherData(lat, lon){
@@ -35,11 +44,13 @@ function weatherData(lat, lon){
     })
     .then(function(data) {
         console.log(data);
-        document.getElementById('cityname').textContent = data.name
+        document.getElementById('cityname').textContent = inputCity.value
         document.getElementById('date').textContent = dayjs().format('MMM D, YYYY')
         document.getElementById('temp').textContent = "Temperature " + data.main.temp + "°F"
         document.getElementById('humidity').textContent = "Humidity " + data.main.humidity + "%"
         document.getElementById('wind').textContent = "Wind Speed " + data.wind.speed + "mph"
+        document.getElementById('img').src = "https://openweathermap.org/img/wn/" + data.weather.icon+".png";
+
     })
 }
 
@@ -49,7 +60,13 @@ function weatherlater(lat, lon) {
     .then(function(response) {
        return response.json();    
     })
-    .then(function(data2) {
-       console.log(data2);
-  })
+    .then(function(data) {
+       console.log(data);
+       for(i=0; i < 4; i++){
+        document.getElementById("day" +(i+1)) = data.list[i].dt_txt
+        document.getElementById("day" +(i+1)+ "temp") = data.list[i].main.temp
+        document.getElementById("day" +(i+1)+ "humidity") = data.list[i].main.humidity
+        document.getElementById("day" +(i+1)+ "wind") = data.list[i].main.wind
+       }
+    })
 }
